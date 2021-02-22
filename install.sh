@@ -9,7 +9,10 @@ apt-get install wget
 apt-get install tesseract
 wget -O ~/../usr/share/tessdata/ind.traineddata "https://github.com/tesseract-ocr/tessdata/blob/master/ind.traineddata?raw=true"
 npm i imgbb-uploader
-npm cache clean -f
+echo "[INFO] If this error, try installing with --dev"
+echo ""
+echo "[Command] npm install --dev"
+echo "[INFO] That's a example commands with --dev."
 npm install
 npm i got
 

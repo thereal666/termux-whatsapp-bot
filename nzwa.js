@@ -61,6 +61,8 @@ const _limit = JSON.parse(fs.readFileSync('./database/json/limit.json'))
 const uang = JSON.parse(fs.readFileSync('./database/json/uang.json'))
 const _registered = JSON.parse(fs.readFileSync('./database/json/registered.json'))
 const antilink = JSON.parse(fs.readFileSync('./database/json/antilink.json'))
+const bad = JSON.parse(fs.readFileSync('./database/group/bad.json'))
+const badword = JSON.parse(fs.readFileSync('./database/group/badword.json'))
 
 // Load options file
 const option = JSON.parse(fs.readFileSync('./options/option.json'))
@@ -432,6 +434,7 @@ async function starts() {
                         const isRegister = checkRegisteredUser(sender)
                         const isAntiLink = isGroup ? antilink.includes(from) : false
                         pushname = nzwa.contacts[sender] != undefined ? nzwa.contacts[sender].vname || nzwa.contacts[sender].notify : undefined
+                        const isBadWord = isGroup ? badword.includes(from) : false
 
 			const isUrl = (url) => {
 			    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
@@ -454,6 +457,50 @@ async function starts() {
 		        const sendPtt = (teks) => {
 		                nzwa.sendMessage(from, audio, mp3, {quoted:mek})
 		        }
+                        //function rank 
+			const levelRole = getLevelingLevel(sender, _level)
+   	                var role = 'Trainee'
+   	                if (levelRole <= 3) {
+   	                        role = 'senior trainee'
+   	                } else if (levelRole <= 5) {
+   	                        role = 'private'
+   	                } else if (levelRole <= 7) {
+   	                        role = 'corporal'
+   	                } else if (levelRole <= 8) {
+   	                        role = 'Sergeant'
+   	                } else if (levelRole <= 9) {
+   	                        role = 'staff sgt I'
+   	                } else if (levelRole <= 10) {
+   	                        role = 'staff sgt II'
+   	                } else if (levelRole <= 11) {
+   	                        role = 'staff sgt II'
+   	                } else if (levelRole <= 12) {
+   	                        role = 'Sgt 1st class I'
+   	                } else if (levelRole <= 13) {
+   	                        role = 'Sgt 1st class II'
+   	                } else if (levelRole <= 14) {
+   	                        role = 'Sgt 1st class III'
+   	                } else if (levelRole <= 14) {
+   	                        role = 'Ggt 1st class IV'
+   	                } else if (levelRole <= 15) {
+   	                        role = 'Master sgt I'
+   	                } else if (levelRole <= 16) {
+   	                        role = 'Master sgt II'
+   	                } else if (levelRole <= 17) {
+   	                        role = 'Master sgt III'
+   	                } else if (levelRole <= 18) {
+   	                        role = 'Master sgt IV'
+   	                } else if (levelRole <= 19) {
+   	                        role = 'Master sgt V'
+   	                } else if (levelRole <= 20) {
+   	                        role = '2nd Lt I'
+   	                } else if (levelRole <= 21) {
+   	                        role = '2nd Lt II'
+   	                } else if (levelRole <= 22) {
+   	                        role = '2nd Lt III'
+   	                } else if (levelRole <= 23) {
+   	                        role = '2nd Lt IV'
+   	                }
 
 	                //function leveling
                         if (isGroup && isLevelingOn) {
@@ -521,7 +568,26 @@ async function starts() {
                         try {
                                 const getmemex = groupMembers.length
                                 if (getmemex <= memberlimit) {
-                                        nzwa.groupLeave(from)
+					reply(`maaf member group belum memenuhi syarat. minimal member group adalah ${memberlimit}`)
+                                        setTimeout( () => {
+                                                nzwa.groupLeave(from)
+					}, 5000)
+					setTimeout( () => {
+						client.updatePresence(from, Presence.composing)
+						reply("2detik")
+					}, 3000)
+					setTimeout( () => {
+						client.updatePresence(from, Presence.composing)
+						reply("3detik")
+					}, 2000)
+					setTimeout( () => {
+						client.updatePresence(from, Presence.composing)
+						reply("4detik")
+					}, 1000)
+					setTimeout( () => {
+						client.updatePresence(from, Presence.composing)
+						reply("5detik")
+					}, 0)
                                 }
                         } catch {
                                 console.error(err)
@@ -572,6 +638,20 @@ async function starts() {
 			        reply("5detik")
 		        }, 0)
 	        }
+
+ 	   	if (isGroup && isBadWord) {
+                        if (bad.includes(messagesC)) {
+                                if (!isGroupAdmins) {
+                                        return reply("JAGA UCAPAN DONG!! 😠")
+                                        .then(() => nzwa.groupRemove(from, sender))
+                                        .then(() => {
+                                                nzwa.sendMessage(from, `*「 ANTI BADWORD 」*\nKamu dikick karena berkata kasar!`, text ,{quoted: mek})
+                                        }).catch(() => nzwa.sendMessage(from, `Untung cya bukan admin, kalo admin udah cya kick!`, text , {quoted : mek}))
+                                } else {
+                                        return reply( "Tolong Jaga Ucapan Min 😇")
+                                }
+                        }
+                }
 
 			colors = ['red','white','black','blue','yellow','green']
 			const isMedia = (type === 'imageMessage' || type === 'videoMessage')
@@ -2583,6 +2663,48 @@ async function starts() {
                                                 await reply(`minimal ${len} user untuk bisa mengakses database`)
                                         }
 				        break
+                                case 'antibadwordgroup':
+                                        if (!isGroup) return reply(mess.only.group)
+                                        if (!isGroupAdmins) return reply(ind.admin())
+                                        if (args.length < 1) return reply('Ketik enable untuk mengaktifkan')
+                                        if (args[0] === 'enable') {
+                                                if (isBadWord) return reply('*fitur BadWord sudah aktif sebelum nya*')
+                 	                        badword.push(from)
+                 	                        fs.writeFileSync('./database/group/badword.json', JSON.stringify(badword))
+                  	                        reply(`*[ Succsess ] mengaktifkan badword di group ini!*`)
+                                        } else if (args[0] === 'disable') {
+                  	                        badword.splice(from, 1)
+                 	                        fs.writeFileSync('./database/group/badword.json', JSON.stringify(badword))
+                 	                        reply(`badword is disable`)
+             	                        } else {
+                 	                        reply(ind.satukos())
+                	                }
+                                        break
+                                case 'addbadword':
+                                        if (!isOwner) return reply(ind.ownerb())
+                                        if (!isGroupAdmins) return reply(ind.admin())
+                                        if (args.length < 1) return reply( `Kirim perintah ${prefix}addbadword [kata kasar]. contoh ${prefix}addbadword bego`)
+                                        const bw = body.slice(12)
+                                        bad.push(bw)
+                                        fs.writeFileSync('./database/group/bad.json', JSON.stringify(bad))
+                                        reply('Success Menambahkan Bad Word!')
+                                        break
+                                case 'delbadword':
+                                        if (!isOwner) return reply(ind.ownerb())
+                                        if (!isGroupAdmins) return reply(ind.admin())
+                                        if (args.length < 1) return reply( `Kirim perintah ${prefix}addbadword [kata kasar]. contoh ${prefix}addbadword bego`)
+                                        let dbw = body.slice(12)
+                                        bad.splice(dbw)
+                                        fs.writeFileSync('./database/group/bad.json', JSON.stringify(bad))
+                                        reply('Success Menghapus BAD WORD!')
+                                        break 
+                                case 'listbadword':
+                                        let lbw = `Ini adalah list BAD WORD\nTotal : ${bad.length}\n`
+                                        for (let i of bad) {
+                                                lbw += `➸ ${i.replace(bad)}\n`
+                                        }
+                                        await reply(lbw)
+                                        break 
 			        case 'wait':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                                         if (!isRegister) return reply(mess.only.daftarB)

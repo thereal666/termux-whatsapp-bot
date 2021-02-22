@@ -47,6 +47,8 @@ const axios = require('axios')
 const lolcatjs = require('lolcatjs')
 const figlet = require('figlet')
 const path = require('path')
+const ms = require('parse-ms')
+const toMs = require('ms')
 
 // Load Json File
 const welkom = JSON.parse(fs.readFileSync('./database/json/welkom.json'))

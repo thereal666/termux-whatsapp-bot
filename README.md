@@ -36,7 +36,7 @@
 </details>
 </div>
 
-## Made By
+## Made With 💜 By
 
 <p align="center">
     <a href="https://github.com/paritsod"><img title="Paritsod" src="https://avatars.githubusercontent.com/u/77239531?s=400&v=4" width="128"></a>

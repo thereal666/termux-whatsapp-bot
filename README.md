@@ -69,7 +69,7 @@
 
 ---
 
-### How To Editing option.json
+### How To Editing [option.json](https://github.com/NazwaS/termux-whatsapp-bot/blob/main/options/option.json)
 
 ```bash
 {

@@ -46,6 +46,7 @@ const qrcode = require("qrcode-terminal")
 const axios = require('axios')
 const lolcatjs = require('lolcatjs')
 const figlet = require('figlet')
+const path = require('path')
 
 // Load Json File
 const welkom = JSON.parse(fs.readFileSync('./database/json/welkom.json'))

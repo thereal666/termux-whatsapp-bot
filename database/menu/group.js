@@ -88,6 +88,9 @@ const group = (prefix, botName, ownerName) => {
    ┃ *Desc* : Shows who the Group Owner is
    ┠──────────────╼
    ┠≽ *${prefix}antilinkgroup* <1/0>
+   ┃ *Desc* : Activating / Deactivating the Anti Badword Feature
+   ┠──────────────╼
+   ┠≽ *${prefix}antibadwordgroup* <enable/disable>
    ┃ *Desc* : Activating / Deactivating the Anti Link Feature
    ╿ *${ownerName}*,
    ╰╼≽ *Developer © ${botName}`

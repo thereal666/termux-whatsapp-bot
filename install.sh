@@ -13,6 +13,9 @@ echo "[INFO] If this error, try installing with --dev"
 echo ""
 echo "[Command] npm install --dev"
 echo "[INFO] That's a example commands with --dev."
+echo "[INFO] Then install got"
+echo "[Command] npm install got"
+echo ""
 npm install
 npm i got
 

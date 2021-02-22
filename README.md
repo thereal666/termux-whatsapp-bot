@@ -187,7 +187,7 @@ Follow The Steps Below!
 > Ctrl + C
 ```
 
-## 120+ Features
+## Features
 
 | Unique Features | YES
 | :---------------------------------------------: | :-----------: |
@@ -297,6 +297,8 @@ Follow The Steps Below!
 | Simih|✅|
 | Tag Me|✅|
 | Anti Link Group|✅|
+| Anti Badword Group|✅|
+| Show Badword List|✅|
 
 | SOUND | YES |
 | :-----------------: | :-------: |
@@ -367,6 +369,8 @@ Follow The Steps Below!
 | Group Broadcast|✅|
 | Clear All Chat|✅|
 | Clone Photo Profile Bot|✅|
+| Add Badword|✅|
+| Delete Badword|✅|
 
 | OTHER | YES |
 | :-----------------: | :-------: |

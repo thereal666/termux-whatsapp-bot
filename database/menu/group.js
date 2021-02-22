@@ -92,6 +92,9 @@ const group = (prefix, botName, ownerName) => {
    ┠──────────────╼
    ┠≽ *${prefix}antibadwordgroup* <enable/disable>
    ┃ *Desc* : Activating / Deactivating the Anti Link Feature
+   ┠──────────────╼
+   ┠≽ *${prefix}listbadword*
+   ┃ *Desc* : Show a Badword List
    ╿ *${ownerName}*,
    ╰╼≽ *Developer © ${botName}`
 }

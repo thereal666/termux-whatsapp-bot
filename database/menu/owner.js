@@ -48,7 +48,7 @@ const owner = (prefix, botName, ownerName) => {
    ┠≽ *${prefix}addbadword* <text>
    ┃ *Desc* : Add Badword Text
    ┠──────────────╼
-   ┠≽ *${prefix}delbadword* <bedwordtextlist>
+   ┠≽ *${prefix}delbadword* <badwordtextlist>
    ┃ *Desc* : Delete Badword Text
    ╿ *${ownerName}*,
    ╰╼≽ *Developer © ${botName}`

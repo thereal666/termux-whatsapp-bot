@@ -1,7 +1,13 @@
+/*
+* ASU KLEN YANG NGAKU2 BOT INI PUNYA KLEN!!!
+* W DAH MALES UPDATE LAGI!
+* KALO ADA YG REMAKE BOT INI TERUD NGAKU2 PUNYA KLEN, W HAPUS NIH REPO!!!
+* GAK BAKAL ADA LAGI NIH BOT!!!
+* KALO MAU REMAKE BOLEH AJA, TAPI NGOTAK AJG!!!
+* KASIH AUTHOR NYA KALO MAU REMAKE ASU!!!
+*/
+
 //starts
-//Hayolo numpang nama doang
-//Ckckckck
-//Mengaku yang bukan punya nya
 const {
     WAConnection,
     MessageType,

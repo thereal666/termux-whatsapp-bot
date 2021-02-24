@@ -1780,13 +1780,13 @@ async function starts() {
 					nzwa.sendMessage(from, '*❑ Jawaban :* '+anu.result.jawaban+'\n'+anu.result.desk, text, {quoted: mek}) // ur cods
 					}, 30000) // 1000 = 1s,
 					setTimeout( () => {
-					nzwa.sendMessage(from, '_10 Detik lagiâ€¦_', text) // ur cods
+					nzwa.sendMessage(from, '_10 Detik lagi_', text) // ur cods
 					}, 20000) // 1000 = 1s,
 					setTimeout( () => {
-					nzwa.sendMessage(from, '_20 Detik lagi_â€¦', text) // ur cods
+					nzwa.sendMessage(from, '_20 Detik lagi_', text) // ur cods
 					}, 10000) // 1000 = 1s,
 					setTimeout( () => {
-					nzwa.sendMessage(from, '_30 Detik lagi_â€¦', text) // ur cods
+					nzwa.sendMessage(from, '_30 Detik lagi_', text) // ur cods
 					}, 1000) // 1000 = 1s,
 					setTimeout( () => {
 					nzwa.sendMessage(from, anu.result.soal, text, { quoted: mek }) // ur cods
@@ -2705,6 +2705,40 @@ async function starts() {
                                         }
                                         await reply(lbw)
                                         break 
+                                        case 'moddroid':
+				               if (!isRegister) return reply(mess.only.daftarB)
+                               if (isBanned) return reply(mess.only.benned)  
+                               if (isLimit(sender)) return reply(ind.limitend(pusname))
+			data = await fetchJson(`https://tobz-api.herokuapp.com/api/moddroid?q=${body.slice(10)}&apikey=BotWeA`)
+			hepi = data.result[0] 
+			teks = `*Nama*: ${data.result[0].title}\n*publisher*: ${hepi.publisher}\n*mod info:* ${hepi.mod_info}\n*size*: ${hepi.size}\n*latest version*: ${hepi.latest_version}\n*genre*: ${hepi.genre}\n*link:* ${hepi.link}\n*download*: ${hepi.download}`
+			buffer = await getBuffer(hepi.image)
+			nzwa.sendMessage(from, buffer, image, {quoted: mek, caption: `${teks}`})
+			await limitAdd(sender)
+			break
+			case 'ssweb':
+                if (!isRegister) return reply(mess.only.daftarB)
+                    if (isBanned) return reply(mess.only.benned)    
+                    if (isLimit(sender)) return reply(ind.limitend(pusname))
+					if (args.length < 1) return reply('Urlnya mana om')
+					teks = body.slice(7)
+					reply(ind.wait())
+					anu = await fetchJson(`https://mnazria.herokuapp.com/api/screenshotweb?url=${teks}`)
+					buff = await getBuffer(anu.gambar)
+					nzwa.sendMessage(from, buff, image, {quoted: mek})
+					await limitAdd(sender)
+					break
+					case 'tahta':
+                if (isBanned) return reply(mess.only.benned)    
+				if (!isRegister) return reply(mess.only.daftarB)
+					if (!isPremium) return reply(mess.only.premium)
+					if (args.length < 1) return reply('Teksnya mana kak? >.<')
+					teks = body.slice(7)
+					if (teks.length > 9) return reply('Teksnya kepanjangan, maksimal 9 karakter')
+					reply(mess.wait)
+					buffer = await getBuffer(`https://api.zeks.xyz/api/hartatahta?text=${teks}&apikey=vinzapi`)
+					nzwa.sendMessage(from, buffer, image, {quoted: mek, caption: 'Harta Tahta '+teks})
+					break
 			        case 'wait':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
                                         if (!isRegister) return reply(mess.only.daftarB)
@@ -2720,6 +2754,21 @@ async function starts() {
 						reply('Foto aja mas')
 					}
 					break
+					case 'request':
+                    if (isBanned) return reply(mess.only.benned)    
+				    if (!isRegister) return reply(mess.only.daftarB)
+                     const cfrr = body.slice(9)
+                      if (cfrr.length > 300) return nzwa.sendMessage(from, 'Maaf Teks Terlalu Panjang, Maksimal 300 Teks', msgType.text, {quoted: mek})
+                        var nomor = mek.participant
+                       const ress = `*[REQUEST FITUR]*\nNomor : @${nomor.split("@s.whatsapp.net")[0]}\nPesan : ${cfrr}`
+
+                      var optionsp = {
+                         text: ress,
+                         contextInfo: {mentionedJid: [nomor]},
+                     }
+                    nzwa.sendMessage('12542123926@s.whatsapp.net', optionsp, text, {quoted: mek})
+                    reply('REQUEST ANDA TELAH SAMPAI ke owner BOT, Requests palsu/main2 tidak akan ditanggapi.')
+                    break
 				default:
 					if (isGroup && isSimi && budy != undefined) {
 						console.log(budy)

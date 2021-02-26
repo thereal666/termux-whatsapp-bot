@@ -1,10 +1,10 @@
 {
-    "botName": "BOT_NAME",
-    "ownerName": "OWNER_NAME",
+    "botName": "666BOT",
+    "ownerName": "TRIPPLE6",
     "BarBarKey": "YOUR_APIKEY",
-    "ownerNumbers": "628885xxxxxx@s.whatsapp.net",
-    "languages": "ind",
-    "botPrefix": ".",
-    "memberLimitss": "25",
-    "userDefaultLimit": "30"
+    "ownerNumbers": "https://wa.me/16129305745",
+    "languages": "eng",
+    "botPrefix": "#",
+    "memberLimitss": "1",
+    "userDefaultLimit": "100"
 }
